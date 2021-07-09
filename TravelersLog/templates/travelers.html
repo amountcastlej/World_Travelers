@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="/logout">Logout</a>
+    <h1>Welcome {{user.first_name}} {{user.last_name}}</h1>
+    <h3>Check out all the cool places our users have been!</h3>
+    <table>
+        <tr>
+            <th>Location</th>
+            <th>Date</th>
+            <th>Traveler</th>
+        </tr>
+        {% for trip in allTrips %}
+        <tr>
+            <td>{{trip.location}}</td>
+            <td>{{trip.date}}</td>
+            <td>{{trip.traveler.first_name}} {{trip.traveler.last_name}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <form action="/travelers/addtrip" method="post">
+        {% csrf_token %}
+        <h4>Add your trip to the database!</h4>
+        <label for="location">Location of Trip:</label>
+        <input type="text" name="location" id="location">
+        <label for="date">Approximate Date of Trip:</label>
+        <input type="date" name="date" id="date">
+        <input type="submit" value="Add your Trip">
+    </form>
+</body>
+</html>
